@@ -24,19 +24,24 @@
 
 \documentclass[oneside]{scrbook}
 
-\usepackage[english]{babel}
-\usepackage[]{csquotes}
-
 \usepackage{textcomp}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 
+\usepackage[english]{babel}
+\usepackage[]{csquotes}
+
 \usepackage[pdftex]{graphicx}
 \usepackage[inkscapeformat=png]{svg}
+%\DeclareGraphicsRule{.png}{png}{.png.bb}{}
 
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{longtable}
+
+\usepackage{hyperref}
+
+\usepackage{todonotes}
 
 \usepackage[style=numeric-comp,backend=biber,sorting=none, sortcites=true, defernumbers=false,bibencoding=utf8, safeinputenc, url=false, isbn=false,mcite=true, maxcitenames=10, mincitenames=3]{biblatex}
 \AtEveryBibitem{
@@ -65,16 +70,18 @@
 \def\Gxsm{GXSM-4.0}
 
 \def\GxsmGraphic#1#2#3{
-  \begin{figure}[hbt]
-    \center \includegraphics[scale=#2]{images/#1}
+  \begin{figure}[h]
+    \centering 
+    \IfFileExists{images/#1}{\includegraphics[scale=#2]{images/#1}}{\missingfigure{#1}}
     \caption{#3}
     \label{fig:#1}
   \end{figure}
 }
 
 \def\GxsmScreenshot#1#2#3{
-  \begin{figure}[hbt]
-    \center \includegraphics[scale=#2]{screenshot/#1}
+  \begin{figure}[h]
+    \centering
+    \IfFileExists{screenshots/#1}{\includegraphics[scale=#2]{screenshots/#1}}{\missingfigure{#1}}
     \caption{#3}
     \label{fig:#1}
   \end{figure}
@@ -86,9 +93,19 @@
 \nocite{Zahl15IM17_38}
 
 \maketitle
+\part{Preface}
+\include{latex/Gxsm-4.0-preface}
 \part{Core}
+%\include{latex/Gxsm-4.0-intro}
+%\include{latex/Gxsm-4.0-installation}
+%\include{latex/Gxsm-4.0-config}
+%\include{latex/Gxsm-4.0-quickstart}
+%\include{latex/Gxsm-4.0-general}
+%\include{latex/Gxsm-4.0-visual}
+%\include{latex/Gxsm-4.0-hacks}
 
 \part{Appendix}
+\include{latex/gpl-3.0.tex}
 \appendix
 
 % ----------------------------------------
@@ -96,5 +113,5 @@
 % ----------------------------------------
 
 \printbibliography[heading=bibintoc,title={References},keyword=gxsm]
- 
+
 \end{document}
