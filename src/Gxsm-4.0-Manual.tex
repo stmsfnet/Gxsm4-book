@@ -1,0 +1,100 @@
+%/* Gxsm-4.0 - Gnome X Scanning Microscopy
+% * universal controlling and data analysis software for STM and AFM: Documentation
+% * 
+% * This software is based on the earlier documentation of XSM, GXSM, GXSM2, GXSM3
+% * 
+% * Copyright (C) 2023 Percy Zahl, Thorsten Wagner, Andreas Klust, Stefan SchrÃ¶der
+% *
+% * Authors: Percy Zahl <zahl@users.sf.net>, Thorsten Wagner <stm@users.sf.net>
+% * WWW Home: http://gxsm.sf.net
+% *
+% * This program is free software: you can redistribute it and/or modify
+% * it under the terms of the GNU General Public License as published by
+% * the Free Software Foundation, either version 3 of the License, or
+% * (at your option) any later version.
+% *    
+% * This program is distributed in the hope that it will be useful,
+% * but WITHOUT ANY WARRANTY; without even the implied warranty of
+% * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% * GNU General Public License for more details.
+% *   
+% * You should have received a copy of the GNU General Public License
+% * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+% */
+
+\documentclass[oneside]{scrbook}
+
+\usepackage[english]{babel}
+\usepackage[]{csquotes}
+
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[inkscapeformat=png]{svg}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\usepackage[style=numeric-comp,backend=biber,sorting=none, sortcites=true, defernumbers=false,bibencoding=utf8, safeinputenc, url=false, isbn=false,mcite=true, maxcitenames=10, mincitenames=3]{biblatex}
+\AtEveryBibitem{
+	\clearfield{day}
+	\clearfield{month}
+	\clearfield{endday}
+	\clearfield{endmonth}
+	\clearfield{issue}
+	\clearfield{url}
+	\clearfield{issn}
+	\clearfield{isbn}
+	\clearfield{eprint}
+	\clearfield{number}
+}
+\bibliography{Gxsm-4.0-References}
+
+\makeindex
+
+\title{The \Gxsm\ manual}
+\author{
+  \includesvg[width=3cm]{images/gxsm4-icon}\\[5mm]
+  Percy Zahl, Andreas Klust, Stefan Schröder, Thorsten Wagner\\
+  and more \url{http://gxsm.sf.net}
+}
+
+\def\Gxsm{GXSM-4.0}
+
+\def\GxsmGraphic#1#2#3{
+  \begin{figure}[hbt]
+    \center \includegraphics[scale=#2]{images/#1}
+    \caption{#3}
+    \label{fig:#1}
+  \end{figure}
+}
+
+\def\GxsmScreenshot#1#2#3{
+  \begin{figure}[hbt]
+    \center \includegraphics[scale=#2]{screenshot/#1}
+    \caption{#3}
+    \label{fig:#1}
+  \end{figure}
+}
+
+\begin{document}
+\nocite{Zahl03RSI74_1222}	
+\nocite{Zahl10JVSTB28_C4E39}
+\nocite{Zahl15IM17_38}
+
+\maketitle
+\part{Core}
+
+\part{Appendix}
+\appendix
+
+% ----------------------------------------
+% Bibliography
+% ----------------------------------------
+
+\printbibliography[heading=bibintoc,title={References},keyword=gxsm]
+ 
+\end{document}
