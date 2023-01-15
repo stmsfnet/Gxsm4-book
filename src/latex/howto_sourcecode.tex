@@ -1,0 +1,96 @@
+%/* Gxsm-4.0 - Gnome X Scanning Microscopy
+% * universal controlling and data analysis software for STM and AFM: Documentation
+% * 
+% * This software is based on the earlier documentation of XSM, GXSM, GXSM2, GXSM3
+% * 
+% * Copyright (C) 2023 Percy Zahl, Thorsten Wagner, Andreas Klust, Stefan Schröder
+% *
+% * Authors: Percy Zahl <zahl@users.sf.net>, Thorsten Wagner <stm@users.sf.net>
+% * WWW Home: http://gxsm.sf.net
+% *
+% * This program is free software: you can redistribute it and/or modify
+% * it under the terms of the GNU General Public License as published by
+% * the Free Software Foundation, either version 3 of the License, or
+% * (at your option) any later version.
+% *    
+% * This program is distributed in the hope that it will be useful,
+% * but WITHOUT ANY WARRANTY; without even the implied warranty of
+% * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% * GNU General Public License for more details.
+% *   
+% * You should have received a copy of the GNU General Public License
+% * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+% */
+
+\chapter{HowTo: Install \Gxsm\ from source code}
+
+\section{System requirements}
+\Gxsm\ needs a reasonably up-to-date machine running a recent version of almost any Linux variant. \Gxsm\ is developed on a Debian Testing. Some description to install \Gxsm\ on a clean Debian bullseye are found in this forum posting: \url{https://sourceforge.net/p/gxsm/discussion/297458/thread/3f0faafe/} It also runs on Ubuntu 22.04 LTS for which dedicated binary packages are available. 
+
+System memory requirements are ranging from little to several gigabytes if you want to deal with big scans, movies or multidimensional data sets.
+
+To compile \Gxsm\ on a Debian Testing install these devel packages:
+
+\begin{verbatim}
+$ apt-get install libgnomeui-dev intltool \
+yelp-tools gtk-doc-tools gnome-common \ 
+libgail-3-dev libnetcdf-dev \
+libnetcdf-cxx-legacy-dev libfftw3-dev \
+libgtk-4-0 libgtksourceview-5.0-dev \
+gsettings-desktop-schemas-dev \ 
+python-gobject-2-dev libgtksourceviewmm-5.0-dev \
+libquicktime-dev libglew-dev freeglut3-dev \ 
+libgl1-mesa-dev libopencv-core-dev \ 
+libopencv-features2d-dev libopencv-highgui-dev \
+libopencv-objdetect-dev libnlopt-dev libglm-dev \
+fonts-freefont-ttf meson ninja
+\end{verbatim}
+
+The `\textbackslash' will connect the command lines. You can also skip it an write everything in one long command line.
+ 
+\subsection{Wayland, NVIDIA, openGL4...}
+
+The 3D visualization requires an openGL4 support based on a NVIDIA GPU (and the nouveau driver). \Gxsm\ will run without 3D visualization. If 3D is selected without in the channelselector, possible a lot of warnings will pop up. This will prevent \Gxsm\ from crashing but the warning dialog windows make \Gxsm\ effectively unresponsive.
+
+To run GXSM4 with Wayland as window manager, you have two alternative to tweak your linux: i) In Ubuntu 22.04 Wayland is the default window manager if you are not using an nvidia gpu. To deactivate Wayland support, please add/enalbe as root in /etc/gdm3/custom.conf the line.
+
+\begin{verbatim}
+WaylandEnable=false
+\end{verbatim}
+
+ii) Alternatively, deactivate the splash screen during GXSM4 startup. Open the dconf-editor and navigate to org/gnome/gxsm4. Here change the entry "splash" to off.
+
+\section{Source code}
+
+Recently, the source code from \url{https://sf.net} to \url{https://github.com}. To obtain a copy of the source code, please run in a terminal:
+
+\begin{verbatim}
+$ cd ~
+$ git clone https://github.com/pyzahl/Gxsm4 gxsm4-git
+\end{verbatim}
+
+The repository will be cloned into ~/gxsm4-git.
+
+\subsection{Meson}
+Since \Gxsm\ the meson build system (instead of make) is used. After download the source code (into ~/gxsm4-git) change into the respective directory from a terminal and run the following commands:
+
+\begin{verbatim}
+$ meson builddir
+$ cd builddir
+$ meson compile
+$ meson install
+\end{verbatim}
+
+First command creates the `builddir' in the project's root folder. Here, `\$meson compile, meson install' calls ninja. You can simply call `ninja install' to do it all. You may have to run the last line with a preceding `sudo' to gain the rights to copy files in system directories. 
+
+To uninstall call in the `buildir'
+
+\begin{verbatim}
+$ ninja uninstall
+\end{verbatim}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "Gxsm-main"
+%%% End: 
+

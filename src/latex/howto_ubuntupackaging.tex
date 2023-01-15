@@ -1,0 +1,139 @@
+%/* Gxsm-4.0 - Gnome X Scanning Microscopy
+% * universal controlling and data analysis software for STM and AFM: Documentation
+% * 
+% * This software is based on the earlier documentation of XSM, GXSM, GXSM2, GXSM3
+% * 
+% * Copyright (C) 2023 Percy Zahl, Thorsten Wagner, Andreas Klust, Stefan Schröder
+% *
+% * Authors: Percy Zahl <zahl@users.sf.net>, Thorsten Wagner <stm@users.sf.net>
+% * WWW Home: http://gxsm.sf.net
+% *
+% * This program is free software: you can redistribute it and/or modify
+% * it under the terms of the GNU General Public License as published by
+% * the Free Software Foundation, either version 3 of the License, or
+% * (at your option) any later version.
+% *    
+% * This program is distributed in the hope that it will be useful,
+% * but WITHOUT ANY WARRANTY; without even the implied warranty of
+% * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% * GNU General Public License for more details.
+% *   
+% * You should have received a copy of the GNU General Public License
+% * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+% */
+
+\chapter{HowTo: Make \Gxsm\ Ubuntu packages}
+
+\section{System requirements}
+
+Make sure that you have all required packages installed. After downloading the source you might have a look at the respective control-file stores in the subfolder debian:
+
+\begin{verbatim}
+$ apt-get install libgnomeui-dev intltool \
+yelp-tools gtk-doc-tools gnome-common \ 
+libgail-3-dev libnetcdf-dev \
+libnetcdf-cxx-legacy-dev libfftw3-dev \
+libgtk-4-0 libgtksourceview-5.0-dev \
+gsettings-desktop-schemas-dev \ 
+python-gobject-2-dev libgtksourceviewmm-5.0-dev \
+libquicktime-dev libglew-dev freeglut3-dev \ 
+libgl1-mesa-dev libopencv-core-dev \ 
+libopencv-features2d-dev libopencv-highgui-dev \
+libopencv-objdetect-dev libnlopt-dev libglm-dev \
+fonts-freefont-ttf meson ninja \
+debhelper dh-autoreconf dh-make devscripts
+\end{verbatim}
+
+The `\textbackslash' will connect the command lines. You can also skip it an write everything in one long command line.
+ 
+\section{Source code}
+
+Recently, the source code from \url{https://sf.net} to \url{https://github.com}. To obtain a copy of the source code, please run in a terminal:
+
+\begin{verbatim}
+$ cd ~
+$ git clone https://github.com/pyzahl/Gxsm4 gxsm4-git
+\end{verbatim}
+
+The repository will be cloned into ~/gxsm4-git.
+
+\subsection{Packing}
+
+The source code also contains all files to make your own deb-package. To do so, checkout the source from \url{https://github.com} as described above. Then enter the folder ~/gxsm4-git and the subfolder debian (assuming that you checked out the source code in gxsm4-git) and rename control\_<your ubuntu> to control.
+
+Then you can use 
+
+\begin{verbatim}
+$ dch -i
+$ dch -r
+\end{verbatim}
+
+to update the changelog file of the package. In particular, you might want to increase the version number. Then use
+
+\begin{verbatim}
+$ debuild -b -I -uc -us
+\end{verbatim}
+
+to make your (unsigned) package. To make a signed package use
+
+\begin{verbatim}
+$ debuild -b -I -k<your email>
+\end{verbatim}
+
+The last command will require the variables DEBEMAIL and DEBFULLNAME to be set, i.e., you may want to add to your .bashrc\\
+
+\begin{verbatim}
+DEBEMAIL="<your email>"
+DEBFULLNAME="<your full name>"
+export DEBEMAIL DEBFULLNAME
+\end{verbatim}
+
+\section{Installation}
+
+Package built this way can be installed via 
+\begin{verbatim}
+$ sudo dpkg -i <package-name>
+\end{verbatim}
+
+\section{Starting \Gxsm}
+
+You can start \Gxsm via the terminal by using `gxsm4' or via the activity panel.
+
+\section{Ubuntu binaries}
+An easy alternative to compiling the source code is to obtain binaries from \url{https://launchpad.net}. Right now, the repository just hosts binaries of GXSM3 for Ubuntu (up to 22.04).
+
+\subsection{Adding the package repository}
+First, you have to add the PPA (Personal Package Archive) hosted on \url{https://launchpad.net} and refresh the local database:
+
+\begin{verbatim}
+$ apt-add-repositry ppa:totto/gxsm
+$ apt update
+\end{verbatim}
+
+Please, follow the instructions in the terminal.
+
+\subsection{Package installation}
+You can install \Gxsm\ via
+
+\begin{verbatim}
+$ apt install gxsm4 
+\end{verbatim}
+
+This command will not only install \Gxsm\ but also makes sure that the required dependencies are installed. 
+
+For SRanger MK2 or MK3 based hardware support, do not forget to install the respective kernel modules via
+
+\begin{verbatim}
+	$ apt install sranger-modules-std-dkms sranger-modules-mk23-dkms
+\end{verbatim}
+
+Once you have installed \Gxsm\ you will be noticed by your package manager (in the lastest Ubuntu version this is called Ubuntu Software Center) about updates.
+
+NOTE: In any case, please do not mix up an installation based on the source code and one via APT. The installation via meson usually will use the folder `/usr/local/', whereas apt will put \Gxsm\ into the folder `/usr/'. The flatpak installation is done in a kind of sandbox so that it does not interfere with other ways of installation.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "Gxsm-main"
+%%% End: 
+
