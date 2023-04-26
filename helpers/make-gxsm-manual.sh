@@ -23,9 +23,9 @@ else
     echo "--------"
     
     # Take a guess
-    if [ -d ../gxsm4-svn/plug-ins ] ; then
+    if [ -d ../gxsm4-git/plug-ins ] ; then
         echo "a) Symlinking plug-ins of Gxsm-4.0."
-        ln -s ../gxsm4-svn/plug-ins .
+        ln -s ../gxsm4-git/plug-ins .
     # Take another guess
     elif [ -d ../Gxsm-4.0/plug-ins ] ; then
         echo "b) Symlinking plug-ins of Gxsm-4.0."
@@ -55,7 +55,7 @@ popd
 cat docuscan.log
 
 echo "-------------------------------------------------------------------"
-echo -n "Result of PDF-generation (./Gxsm-3.0-Manual.pdf): "
+echo -n "Result of PDF-generation (./Gxsm-4.0-Manual.pdf): "
 if [ -f ./src/Gxsm-4.0-Manual.pdf ] ; then
    echo "SUCCESS"
    mv -v ./src/Gxsm-4.0-Manual.pdf .
