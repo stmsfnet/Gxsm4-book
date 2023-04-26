@@ -5,7 +5,7 @@ echo "This is the foundation for the online version."
 echo "Step 1"
 apt update
 echo "Step 2"
-apt -y install texlive-latex-recommended \
+sudo apt -y install texlive-latex-recommended \
 	texlive-latex-base \
 	texlive-fonts-recommended \
 	texlive-latex-extra \
@@ -17,6 +17,7 @@ apt -y install texlive-latex-recommended \
 	biber \
 	pandoc mkdocs mkdocs-nature \
 	mkdocs-bootstrap \
-	inkscape
+	inkscape \
+	python3-pip
 echo "Step 3"
 pip install mkdocs-windmill
