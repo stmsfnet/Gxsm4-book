@@ -18,7 +18,7 @@ my $look_for_chapter_intro   = 1;
 my $ClassIntroFile = "PlugInClass.doc";
 
 
-my $MODULE = "Gxsm-3.0";
+my $MODULE = "Gxsm-4.0";
 
 # known tags:
 my $DSC_BEGIN_TAG   = "% BeginPlugInDocuSection";
