@@ -18,13 +18,13 @@ install:
 	install -o root -g root Gxsm-4.0-Manual.pdf $(INSTALLDIR)
 
 clean:
-	pushd src && rm -rf *.dvi *.log *.aux *.idx *.ilg *.ind *.bbl *.bcf *.blg *.out *.toc *.bak latex/*.aux && popd
+	bash helpers/make-clean.sh
 
 #html:
-#	latex2html -local_icons -antialias -antialias_text -mkdir -dir html -split +1 -prefix gxsm- Gxsm-3.0-Manual
+#	latex2html -local_icons -antialias -antialias_text -mkdir -dir html -split +1 -prefix gxsm- Gxsm-4.0-Manual
 
 view:
-	xdg-open src/Gxsm-4.0-Manual.pdf
+	xdg-open Gxsm-4.0-Manual.pdf
 
 markdown:
 	pandoc \
