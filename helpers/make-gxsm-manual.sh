@@ -49,7 +49,7 @@ fi
 ./helpers/docuscangxsmplugins.pl | tail - -n14 > docuscan.log
 
 pushd src/
-latexmk -pdf Gxsm-4.0-Manual.tex
+latexmk -pdf Gxsm-4.0-Manual.tex --shell-escape
 popd
 
 cat docuscan.log
